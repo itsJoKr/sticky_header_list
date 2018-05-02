@@ -1,16 +1,17 @@
 # sticky_header_list
+Sticky Header list for Flutter.
 
 ![](https://im5.ezgif.com/tmp/ezgif-5-db124bed14.gif)
 
-
-Sticky Header list for Flutter.
 
 ## Usage
 
 You need to wrap your widgets with `StickyListRow`. Use `HeaderRow` for headers that sticks
 and `RegularRow` for regular rows that scroll normally.
 
-Height is optional, but if you include it, it will avoid usage of GlobalKeys to determine height: `new StickyRow(child: yourWidget, height: 20.0),`
+Height is optional, but if you include it, it will avoid usage of GlobalKeys to determine height: 
+
+`new StickyRow(child: yourWidget, height: 20.0)`
 
 Usage is similar to ListView. You can either supply list:
 
