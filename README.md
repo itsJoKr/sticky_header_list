@@ -1,7 +1,7 @@
 # sticky_header_list
 Sticky Header list for Flutter.
 
-![](https://i.imgur.com/8M4nMcO.gifv)
+![](https://im5.ezgif.com/tmp/ezgif-5-db124bed14.gif)
 
 
 ## Usage
