@@ -2,6 +2,7 @@ library sticky_header_list;
 
 import 'package:flutter/material.dart';
 import 'sticky_row.dart';
+export 'sticky_row.dart';
 
 typedef StickyListRow StickyWidgetBuilder(BuildContext context, int index);
 

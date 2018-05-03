@@ -1,8 +1,11 @@
 name: sticky_header_list
 description: Sticky headers list
 version: 1.0.0
-author: Josip Krnjic
+author: Josip Krnjic <jokr.dev@gmail.com>
 homepage: https://github.com/itsJoKr/sticky_header_list
+
+environment:
+  sdk: ">=1.8.0 <3.0.0"
 
 dependencies:
   flutter:
