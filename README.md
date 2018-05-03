@@ -16,11 +16,11 @@ Height is optional, but if you include it, it will avoid usage of GlobalKeys to 
 Usage is similar to ListView. You can either supply list:
 
     new StickyList(
-          children: <StickyWidget>[
-            new StickyRow(child: yourWidget),
+          children: <StickyListRow>[
+            new HeaderRow(child: yourWidget),
             new RegularRow(child: yourWidget),
             new RegularRow(child: yourWidget),
-            new StickyRow(child: yourWidget),
+            new HeaderRow(child: yourWidget),
             new RegularRow(child: yourWidget),
             /...
           ],
@@ -28,10 +28,10 @@ Usage is similar to ListView. You can either supply list:
         
 Or you can use builder:
 
-    return new StickyList.builder(
+     new StickyList.builder(
           builder: (BuildContext context, int index) {
             if (something)
-              return new StickyRow(yourWidget)
+              return new HeaderRow(yourWidget)
             else
               return new RegularRow(yourWidget)
           },
