@@ -3,3 +3,5 @@
 Initial Release.
 
 [1.0.1] - 3-May-2018 : Export file in sticky_header_list.dart
+
+[1.0.2] - 3-May-2018 : Update readme
