@@ -43,12 +43,11 @@ class StickyList extends StatefulWidget {
 
   @override
   _StickyListState createState() =>
-      new _StickyListState(background: background, delegate: childrenDelegate);
+      new _StickyListState(background: background);
 }
 
 class _StickyListState extends State<StickyList> {
   Color _background;
-  _StickyChildBuilderDelegate _childrenDelegate;
 
   /// When new sticky is coming, we use transform (translation) to simulate
   /// that the new sticky header is pushing the old one off the screen.
@@ -58,11 +57,9 @@ class _StickyListState extends State<StickyList> {
   var _currentPosition = 0;
 
   _StickyListState({
-    Color background,
-    _StickyChildBuilderDelegate delegate
+    Color background
   }) {
     this._background = background;
-    this._childrenDelegate = delegate;
     this._stickyTranslationOffset = 0.0;
   }
 
@@ -76,9 +73,9 @@ class _StickyListState extends State<StickyList> {
           ),
           new ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              return this._childrenDelegate.build(context, index).child;
+              return this.widget.childrenDelegate.build(context, index).child;
             },
-            itemCount: this._childrenDelegate.itemCount,
+            itemCount: this.widget.childrenDelegate.itemCount,
             controller: _getScrollController(),
             padding: const EdgeInsets.all(0.0),
           ),
@@ -116,12 +113,12 @@ class _StickyListState extends State<StickyList> {
 
   Widget _getPreviousHeader(BuildContext ctx, int position) {
     for (int i = position; i >= 0; i--) {
-      if (this._childrenDelegate.build(ctx, i).isSticky()) {
-        return this._childrenDelegate.build(ctx, i).child;
+      if (this.widget.childrenDelegate.build(ctx, i).isSticky()) {
+        return this.widget.childrenDelegate.build(ctx, i).child;
       }
     }
 
-    return this._childrenDelegate.build(ctx, 0).child;
+    return this.widget.childrenDelegate.build(ctx, 0).child;
   }
 
   ScrollController _getScrollController() {
@@ -149,8 +146,8 @@ class _StickyListState extends State<StickyList> {
   }
 
   void _calculateStickyOffset(BuildContext ctx, int newPosition, double pixels) {
-    if ((newPosition > 0) && this._childrenDelegate.build(ctx, newPosition).isSticky()) {
-      final headerHeight = this._childrenDelegate.build(ctx, newPosition).getHeight();
+    if ((newPosition > 0) && this.widget.childrenDelegate.build(ctx, newPosition).isSticky()) {
+      final headerHeight = this.widget.childrenDelegate.build(ctx, newPosition).getHeight();
       if (_getOffsetForCurrentRow(context, pixels, newPosition) < headerHeight) {
         setState(() {
           _stickyTranslationOffset =
@@ -169,10 +166,10 @@ class _StickyListState extends State<StickyList> {
   double _getOffsetForCurrentRow(BuildContext ctx, double offset, int position) {
     double calcOffset = offset;
     for (var i = 0; i < position - 1; i++) {
-      calcOffset = calcOffset - this._childrenDelegate.build(ctx, i).getHeight();
+      calcOffset = calcOffset - this.widget.childrenDelegate.build(ctx, i).getHeight();
     }
 
-    return (this._childrenDelegate.build(ctx, position-1).getHeight() - calcOffset);
+    return (this.widget.childrenDelegate.build(ctx, position-1).getHeight() - calcOffset);
   }
 
   int _getPositionForOffset(BuildContext ctx, double offset) {
@@ -180,7 +177,7 @@ class _StickyListState extends State<StickyList> {
     double calcOffset = offset;
 
     while (calcOffset > 0) {
-      calcOffset = calcOffset - this._childrenDelegate.build(ctx, counter).getHeight();
+      calcOffset = calcOffset - this.widget.childrenDelegate.build(ctx, counter).getHeight();
       counter++;
     }
 
