@@ -77,6 +77,7 @@ class _StickyListState extends State<StickyList> {
             },
             itemCount: this.widget.childrenDelegate.itemCount,
             controller: _getScrollController(),
+            physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(0.0),
           ),
           new Positioned(
