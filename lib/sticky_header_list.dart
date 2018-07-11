@@ -54,7 +54,7 @@ class _StickyListState extends State<StickyList> {
   var _stickyTranslationOffset = 0.0;
 
   /// Current position at the top of list
-  var _currentPosition = 0;
+  var _currentPosition = -1;
 
   _StickyListState({
     Color background
@@ -176,6 +176,10 @@ class _StickyListState extends State<StickyList> {
   int _getPositionForOffset(BuildContext ctx, double offset) {
     int counter = 0;
     double calcOffset = offset;
+
+    if (offset < 1) {
+      return -1;
+    }
 
     while (calcOffset > 0) {
       calcOffset = calcOffset - this.widget.childrenDelegate.build(ctx, counter).getHeight();
