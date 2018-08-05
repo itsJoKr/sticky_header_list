@@ -19,27 +19,30 @@ typedef StickyListRow StickyWidgetBuilder(BuildContext context, int index);
 class StickyList extends StatefulWidget {
   /// Background color of list
   final Color background;
+  final bool reverse;
   /// Delegate that builds children widget similar to [SliverChildBuilderDelegate]
   final _StickyChildBuilderDelegate childrenDelegate;
 
   /// Use this constructor for list of [StickyListRow]
   StickyList({
     Color background: Colors.transparent,
+    bool reverse: false,
     List<StickyListRow> children: const <StickyListRow>[],
   })
       : childrenDelegate = new _StickyChildBuilderDelegate(children),
-        background = background;
+        reverse = reverse, background = background;
 
   /// This constructor is appropriate for list views with a large (or infinite)
   /// number of children because the builder is called only for those children
   /// that are actually visible.
   StickyList.builder({
     Color background: Colors.transparent,
+    bool reverse: false,
     int itemCount,
     StickyWidgetBuilder builder
   })
       : childrenDelegate = new _StickyChildBuilderDelegate.builder(
-      builder, itemCount), background = background;
+      builder, itemCount), reverse = reverse, background = background;
 
   @override
   _StickyListState createState() =>
@@ -72,6 +75,7 @@ class _StickyListState extends State<StickyList> {
             decoration: new BoxDecoration(color: _background),
           ),
           new ListView.builder(
+            reverse: this.widget.reverse,
             itemBuilder: (BuildContext context, int index) {
               return this.widget.childrenDelegate.build(context, index).child;
             },
@@ -82,7 +86,8 @@ class _StickyListState extends State<StickyList> {
           ),
           new Positioned(
             child: _getStickyHeaderWidget(context),
-            top: 0.0,
+            top: this.widget.reverse ? null : 0.0,
+            bottom: this.widget.reverse ? 0.0 : null,
             left: 0.0,
             right: 0.0,
           )
@@ -102,11 +107,12 @@ class _StickyListState extends State<StickyList> {
         header = (header as WrapStickyWidget).child;
       }
 
+      var translationOffset = this.widget.reverse ? _stickyTranslationOffset : -_stickyTranslationOffset;
       stickyWidget = new ClipRect(
           child: new Container(
             child: header,
             transform: new Matrix4.translationValues(
-                0.0, -_stickyTranslationOffset, 0.0),
+                0.0, translationOffset, 0.0),
           ));
     }
     return stickyWidget;
