@@ -22,15 +22,17 @@ class StickyList extends StatefulWidget {
   final bool reverse;
   /// Delegate that builds children widget similar to [SliverChildBuilderDelegate]
   final _StickyChildBuilderDelegate childrenDelegate;
+  final ScrollController controller;
 
   /// Use this constructor for list of [StickyListRow]
   StickyList({
     Color background: Colors.transparent,
     bool reverse: false,
     List<StickyListRow> children: const <StickyListRow>[],
+    ScrollController controller,
   })
       : childrenDelegate = new _StickyChildBuilderDelegate(children),
-        reverse = reverse, background = background;
+        reverse = reverse, background = background, controller = controller;
 
   /// This constructor is appropriate for list views with a large (or infinite)
   /// number of children because the builder is called only for those children
@@ -129,7 +131,8 @@ class _StickyListState extends State<StickyList> {
   }
 
   ScrollController _getScrollController() {
-    var controller = new ScrollController();
+    // If a ScrollController is provided use it, otherwise create a new ScrollController
+    var controller = widget.controller != null ? widget.controller : new ScrollController();
     controller.addListener(() {
       var pixels = controller.offset;
       var newPosition = _getPositionForOffset(context, pixels);
@@ -237,4 +240,3 @@ class _StickyChildBuilderDelegate {
   }
 
 }
-
