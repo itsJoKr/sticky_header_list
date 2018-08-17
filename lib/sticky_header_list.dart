@@ -28,8 +28,8 @@ class StickyList extends StatefulWidget {
   StickyList({
     Color background: Colors.transparent,
     bool reverse: false,
-    List<StickyListRow> children: const <StickyListRow>[],
     ScrollController controller,
+    List<StickyListRow> children: const <StickyListRow>[],
   })
       : childrenDelegate = new _StickyChildBuilderDelegate(children),
         reverse = reverse, background = background, controller = controller;
@@ -41,10 +41,11 @@ class StickyList extends StatefulWidget {
     Color background: Colors.transparent,
     bool reverse: false,
     int itemCount,
+    ScrollController controller,
     StickyWidgetBuilder builder
   })
       : childrenDelegate = new _StickyChildBuilderDelegate.builder(
-      builder, itemCount), reverse = reverse, background = background;
+      builder, itemCount), reverse = reverse, background = background, controller = controller;
 
   @override
   _StickyListState createState() =>

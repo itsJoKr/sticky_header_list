@@ -11,3 +11,5 @@ Initial Release.
 [1.0.4] - 11-July-2018 : Fix for overscroll indicator in Android. Refresh indicator now works if there are not enough items in list.
 
 [1.0.5] - 5-August-2018: Implement option to reverse list layout
+
+[1.0.6] - 17-August-2018: Add ScrollController as optional parameter
