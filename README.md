@@ -1,6 +1,8 @@
 # sticky_header_list
 Sticky Header list for Flutter.
 
+**DEPRECATED:** There was no sticky library when I created this. Hope it helped someone, but now there are better solutions out there, so please check them at pub.dev
+
 ![](https://i.imgur.com/8M4nMcO.gif)
 
 
